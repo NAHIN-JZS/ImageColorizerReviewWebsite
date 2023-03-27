@@ -169,7 +169,18 @@
                 </div>
 
                 <div style = "width: 400px; margin: 0 auto;">
-                    <img src = "images\18-days-voyage-m.jpg" style="width:256px;height:256px;" >
+                <?php
+                if(!isset($_GET["image_path"])){
+                    $img_path = "images/18-days-voyage-m.jpg";
+                    echo $img_path;
+                }
+                else{
+                    $img_path = $_GET["image_path"];
+                    echo $img_path;
+                }
+                
+                ?>
+                    <img src = <?php echo $img_path; ?> style="width:256px;height:256px;" >
 
                     <div class="rating-container">
                                 <!-- <form action="" enctype="multipart/form-data" method="post"> -->
