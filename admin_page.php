@@ -117,7 +117,7 @@ mysqli_close($conn);
                         
                         <h3 class="feature-heading">Choose one or more images to upload.</h3>
                         <div>
-                        <form action="add_image.php" method="post" enctype="multipart/form-data">
+                        <form action="admin_page.php" method="post" enctype="multipart/form-data">
                           <input type="file" name="files[]" multiple>
                           <input type="submit" value="Upload">
                         </form>

@@ -62,7 +62,7 @@ require 'con2database.php';
 
 
                 <!-- <a href="add_image.php" class="btn btn-black">Convert an Image</a> -->
-                <a href="add_image.php" class="btn btn-black">Admin</a>
+                <a href="login.php" class="btn btn-black">Admin</a>
 
                 <button class="menu_toggle">
                     <svg height="6" width="20" xmlns="http://www.w3.org/2000/svg" class="open">
