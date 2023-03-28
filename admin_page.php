@@ -59,6 +59,9 @@ $username = "root";
 $password = "";
 $dbname = "image_colorizer";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+// ini_set('max_file_uploads', 300);
+
 ?>
 <?php
 if (isset($_FILES['files'])) {

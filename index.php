@@ -87,11 +87,9 @@ require 'con2database.php';
 
         <!-- GALLERY SECTION -->
                 <div class="section_text-box">
-                                    <h2 class="heading">Image Colorizer</h2>
-                                    <p class="opaque-black">Photosnap can help you create stories that resonate with your
-                                        audience.
-                                        Our
-                                        tool is designed for photographers of all levels, brands, businesses you name it.</p>
+                                    <h2>Image Colorizer</h2>
+                                    <p class="opaque-black">Thank you for taking the time to review the output of my model-generated color photo. The model has attempted to colorize a black and white photo, and I would appreciate your feedback on how realistic it looks. I have included some AI-generated color photos below for reference. Please rate the photo on a scale of 1-5 stars, with 5 stars being the most realistic. Thank you for your help!
+                                    </p>
                 </div>
 
                 <div style = "width: 400px; margin: 0 auto;">
@@ -113,16 +111,17 @@ require 'con2database.php';
                     }
                     
    
-                    echo $img_path;
-                    echo $image_id;
+                    // echo $img_path;
+                    // echo $image_id;
 
 
                 }
                 else{
                     $img_path = $_GET["image_path"];
                     $image_id = $_GET["new_image_id"];
-                    echo $img_path;
-                    echo $image_id;
+                    // echo $img_path;
+                    // echo $image_id;
+                    echo "How much it looks realistic?";
                 }
                 
                 ?>
@@ -166,52 +165,24 @@ require 'con2database.php';
                         <!-- <img src="images/logo-white.svg" alt="logo"> -->
                     <img src="images/nahin_white.png" alt="logo" height="70" width="130">
                     </a>
-                    <!-- <ul class="social">
-                        <li>
-                            <a class="email" href="index.html"></a>
-                        </li> -->
-
-                       <!-- <li>
-                            <a class="facebook" href="index.html"></a>
-                        </li>
-                        <li>
-                            <a class="linkedin" href="https://www.linkedin.com/in/syed-nahin-hossain-658189176/"></a>
-                        </li> -->
-                        <!-- <li>
-                            <a class="youtube" href="index.html"></a>
-                        </li>
-                        <li>
-                            <a class="twitter" href="index.html"></a>
-                        </li> -->
-                        <!-- <li>
-                            <a class="pinterest" href="index.html"></a>
-                        </li> 
-                        <li>
-                            <a class="instagram" href="index.html"></a>
-                        </li> -->
-
 
                         <ul class="nav justify-content-center">
-                <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/syed-nahin-hossain-658189176/" title="LinkedIn"><i class="fab fa-linkedin"></i><span class="menu-title sr-only">LinkedIn</span></a>
+                <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/syed-nahin-hossain-658189176/" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i><span class="menu-title sr-only">LinkedIn</span></a>
                 </li>
-                <!-- <li class="nav-item"><a class="nav-link" href="https://orcid.org/0000-0003-2528-7573" title="Orcid"><i class="fab fa-orcid"></i><span class="menu-title sr-only">Orcid</span></a> --> -->
-                <!-- </li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/templateflip" title="Instagram"><i class="fab fa-instagram"></i><span class="menu-title sr-only">Instagram</span></a>
-                </li> -->
-                <li class="nav-item"><a class="nav-link" href="https://github.com/NAHIN-JZS" title="Github"><i class="fab fa-github"></i><span class="menu-title sr-only">Github</span></a>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/NAHIN-JZS" title="Github" target="_blank"><i class="fab fa-github" ></i><span class="menu-title sr-only">Github</span></a>
                 </li>
               </ul>
                 </div>
                 <div class="footer_menu-box">
                     <ul class="footer_menu">
                         <li class="footer_menu-item">
-                            <a class="footer_menu-link" href="index.html">Home</a>
+                            <a class="footer_menu-link" href="index.php">Home</a>
                         </li>
                         <li class="footer_menu-item">
-                            <a class="footer_menu-link" href="stories.html">Get GitHub Link</a>
+                            <a class="footer_menu-link" href="https://github.com/NAHIN-JZS/image_colorization" target="_blank">Get GitHub Link</a>
                         </li>
                         <li class="footer_menu-item">
-                            <a class="footer_menu-link" href="features.html">About</a>
+                            <a class="footer_menu-link" href="https://nahin-jzs.github.io/" target="_blank">About Me</a>
                         </li>
                         
                         <!-- <li class="footer_menu-item">
@@ -220,7 +191,7 @@ require 'con2database.php';
                     </ul>
                 </div>
                 <div class="footer_copyright">
-                    <a href="convert.php" class="invite-link invite-link-white">Convert Image</a>
+                    <a href="convert_an_image.php" class="invite-link invite-link-white">Convert Image</a>
                     <p class="opaque-grey">Copyright 2022. All Rights Reserved</p>
                 </div>
             </div>
