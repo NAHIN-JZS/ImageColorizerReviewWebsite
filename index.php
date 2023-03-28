@@ -47,17 +47,10 @@
 
 
 <body>
-<!-- <?php
-    // $command = escapeshellcmd('python C:\xampp\htdocs\ImageColorization\image_path_generator.py');
-    // $returnedValue = shell_exec($command);
-    // echo $returnedValue;
-    // echo $argv[1];
-    // echo $output;
-    // $arr = json_decode($returnedValue);
-    // var_dump($arr);
-    // echo $arr[1];
-    // echo $returnedValue;
-    ?> -->
+
+<?php
+require 'con2database.php';
+?>
     <!-- HEADER -->
     <header>
         <div class="container">
@@ -67,17 +60,6 @@
                     <img src="images/nahin_black.svg" alt="logo" height="150" width="150">
                 </a>
 
-                <!-- <ul class="nav_list">
-                    <li class="nav_list-item">
-                        <a href="stories.html" class="nav_list-link">Stories</a>
-                    </li>
-                    <li class="nav_list-item">
-                        <a href="features.html" class="nav_list-link">Features</a>
-                    </li>
-                    <li class="nav_list-item">
-                        <a href="pricing.html" class="nav_list-link">Pricing</a>
-                    </li>
-                </ul> -->
 
                 <!-- <a href="add_image.php" class="btn btn-black">Convert an Image</a> -->
                 <a href="add_image.php" class="btn btn-black">Admin</a>
@@ -102,63 +84,6 @@
 
     <!-- MAIN -->
     <main>
-        <!-- CREATE AND SHARE SECTION -->
-        <!-- <section class="create">
-            <div class="container-lg">
-                <div class="row">
-                    <div class="section_text section_text_black">
-                        <div class="section_text-box">
-                            <h2 class="heading white">Create and share your photo stories.</h2>
-                            <p class="opaque-grey">Photosnap is a platform for photographers and visual storytellers. We
-                                make it
-                                easy to share
-                                photos, tell stories and connect with others.</p>
-                            <a href="index.html" class="invite-link invite-link-white">Get an invite </a>
-                        </div>
-                    </div>
-                    <div class="section_image section-create-img"></div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- BEAUTIFUL STORIES SECTION -->
-        <!-- <section class="stories">
-            <div class="container-lg">
-                <div class="row">
-                    <div class="section_image section-stories-img"></div>
-                    <div class="section_text section_text_white">
-                        <div class="section_text-box">
-                            <h2 class="heading black">Beautiful stories everytime</h2>
-                            <p class="opaque-black">We provide design templates to ensure your stories look terrific.
-                                Easily
-                                add
-                                photos, text, embed
-                                maps and media from other networks. Then share your story with everyone.</p>
-                            <a href="index.html" class="invite-link invite-link-black">View the stories</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- FOR EVERYONE SECTION -->
-        <!-- <section class="everyone">
-            <div class="container-lg">
-                <div class="row">
-                    <div class="section_text section_text_white">
-                        <div class="section_text-box">
-                            <h2 class="heading black">Designed for everyone</h2>
-                            <p class="opaque-black">Photosnap can help you create stories that resonate with your
-                                audience.
-                                Our
-                                tool is designed for photographers of all levels, brands, businesses you name it.</p>
-                            <a href="index.html" class="invite-link invite-link-black">View the stories</a>
-                        </div>
-                    </div>
-                    <div class="section_image section-everyone-img"></div>
-                </div>
-            </div>
-        </section> -->
 
         <!-- GALLERY SECTION -->
                 <div class="section_text-box">
@@ -172,10 +97,26 @@
                 <div style = "width: 400px; margin: 0 auto;">
                 <?php
                 if(!isset($_GET["image_path"])){
-                    $img_path = "images/18-days-voyage-m.jpg";
-                    $image_id = 40;
+                    // $img_path = "images/18-days-voyage-m.jpg";
+                    // $image_id = 40;
+
+                    $get_one_image_with_lowest_count = 'SELECT * FROM `image_info` WHERE `image_info`. `count` = (SELECT MIN(`image_info`. `count`) FROM `image_info`) LIMIT 1;';
+    
+                    $new_data = mysqli_query($connect, $get_one_image_with_lowest_count);
+
+                    foreach ($new_data as $key => $value) {
+                        $image_id = $value['id'];
+                        $img_path = $value['path'];
+                        // $review_sum = $value['review_sum'];
+                        // $count = $value['count'];
+                        // $avg_review = $value['avg_review'];
+                    }
+                    
+   
                     echo $img_path;
                     echo $image_id;
+
+
                 }
                 else{
                     $img_path = $_GET["image_path"];
@@ -193,20 +134,6 @@
 
                                 <div class="col-md-3">
                                 <div class="form-group">
-
-                                    <!-- <label for="h_type">Give a Number</label><br>
-                                    <select class="select_box form-control form-control-sm" id="h_type" name="h_type" size="1">
-                                        <option value="---">10 </option>
-                                        <option value="9">9</option>
-                                        <option value="8">8</option>
-                                        <option value="7">7</option>
-                                        <option value="6">6</option>
-                                        <option value="5">5</option>
-                                        <option value="4">4</option>
-                                        <option value="3">3</option>
-                                        <option value="2">2</option>
-                                        <option value="1">1</option>
-                                    </select> -->
 
                                     <input type="hidden" name="image_id" value=<?php echo $image_id; ?>>
                                     <input type="hidden" name="rating" id="rating" value="0">
@@ -226,35 +153,6 @@
             <div class="container">
             </div>
         </section>
-
-        <!-- FEATURES GRID -->
-        <!-- <section class="our-features">
-            <div class="container">
-                <div class="row">
-                    <div class="feature">
-                        <div class="feature-image"><img src="images/responsive.svg" alt="responsive"></div>
-                        <h3 class="feature-heading">100% Responsive</h3>
-                        <p class="feature-text">No matter which the device you’re on, our site is fully responsive and
-                            stories look beautiful on
-                            any screen.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-image"><img src="images/no-limit.svg" alt="no limit"></div>
-                        <h3 class="feature-heading">No Photo Upload Limit</h3>
-                        <p class="feature-text">Our tool has no limits on uploads or bandwidth. Freely upload in bulk
-                            and
-                            share all of your stories in one go.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-image"><img src="images/embed.svg" alt="embed"></div>
-                        <h3 class="feature-heading">Available to Embed</h3>
-                        <p class="feature-text">Embed Tweets, Facebook posts, Instagram media, Vimeo or YouTube videos,
-                            Google Maps, and more.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section> -->
     </main>
 
     
