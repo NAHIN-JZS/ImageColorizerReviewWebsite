@@ -173,11 +173,15 @@
                 <?php
                 if(!isset($_GET["image_path"])){
                     $img_path = "images/18-days-voyage-m.jpg";
+                    $image_id = 40;
                     echo $img_path;
+                    echo $image_id;
                 }
                 else{
                     $img_path = $_GET["image_path"];
+                    $image_id = $_GET["new_image_id"];
                     echo $img_path;
+                    echo $image_id;
                 }
                 
                 ?>
@@ -204,7 +208,7 @@
                                         <option value="1">1</option>
                                     </select> -->
 
-                                    <input type="hidden" name="product_id" value="123">
+                                    <input type="hidden" name="image_id" value=<?php echo $image_id; ?>>
                                     <input type="hidden" name="rating" id="rating" value="0">
                                     <span class="rating-star" data-rating="1">&#9733;</span>
                                     <span class="rating-star" data-rating="2">&#9733;</span>

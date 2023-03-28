@@ -2,17 +2,38 @@
 
 require 'con2database.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $product_id = $_POST['product_id'];
+    $image_id = $_POST['image_id'];
     $rating = $_POST['rating'];
     
     // Save the review to the database or do something else with it
     
-    // Display a message to the user with the rating value
-    echo 'Thank you for submitting your review. Your rating is: ' . $rating;
+    $sql_retive_current_image = "SELECT * FROM `image_info` WHERE `image_info`.`id` = '$image_id' ;";
+    $data = mysqli_query($connect, $sql_retive_current_image);
+
+	foreach ($data as $key => $value) {
+		// $id = $value['id'];
+		$review_sum = $value['review_sum'];
+		$count = $value['count'];
+		$avg_review = $value['avg_review'];
+	}
+    $update_review_sum = $review_sum + $rating;
+    $update_count = $count + 1;
+    $update_avg_review = $update_review_sum / $update_count;
+    echo 'Thank you for submitting your review. Your rating is: ' . $rating."  ". $update_avg_review . "    " . $update_count . " ". $update_review_sum;
+    
+    $sql_update_rating = "UPDATE `image_info` SET `review_sum` = '$update_review_sum', `count`='$update_count', `avg_review`='$update_avg_review' WHERE `image_info`.`id` = '$image_id';";
+    mysqli_query($connect, $sql_update_rating);
+    
+    
     // $_POST['image_path'] = "images/running-free-m.jpg";
-    $image_path = "images/running-free-m.jpg";
-    header("Location:index.php?image_path=$image_path");
+
+    $new_image_path = "images/running-free-m.jpg";
+    $new_image_id = "45";
+    $url = "index.php?image_path=" . urlencode($new_image_path) . "&new_image_id=" . urlencode($new_image_id);
+    // header("Location: " . $url);
     // echo $_POST['image_path'];
+    // echo $url;
+
     exit();
 }
 ?>
