@@ -12,9 +12,9 @@
 		$(document).ready(function() {
 			$('.rating-star').on('mouseenter', function() {
 				var rating = $(this).data('rating');
-				for (var i = 1; i <= rating; i++) {
-					$('.rating-star[data-rating="'+i+'"]').addClass('active');
-				}
+				// for (var i = 1; i <= rating; i++) {
+				// 	$('.rating-star[data-rating="'+i+'"]').addClass('active');
+				// }
 			}).on('mouseleave', function() {
 				$('.rating-star').removeClass('active');
 			}).on('click', function() {
@@ -34,7 +34,7 @@
 			font-size: 24px;
 			color: #ccc;
 			cursor: pointer;
-			margin-right: 5px;
+			margin-right: 25px;
 		}
 
 		.rating-star:hover,
@@ -86,15 +86,19 @@ require 'con2database.php';
     <main>
 
         <!-- GALLERY SECTION -->
-                <div class="section_text-box">
+                <!-- <div class="section_text-box"> -->
+                <div style = "width: 100%; max-width: 1000px;  margin: 0 auto; padding: 0 55px;">
                                     <h2>Image Colorizer</h2>
                                     <p class="opaque-black">Thank you for taking the time to review the output of my model-generated color photo. The model has attempted to colorize a black and white photo, and I would appreciate your feedback on how realistic it looks. I have included some AI-generated color photos below for reference. Please rate the photo on a scale of 1-5 stars, with 5 stars being the most realistic. Thank you for your help!
                                     </p>
                 </div>
 
-                <div style = "width: 400px; margin: 0 auto;">
+                <!-- <div style = "width: 700px; margin: 0 auto;"> -->
+                <div style = "width: 100%; max-width: 800px;  margin: 0 auto; padding: 55px 55px;">
+
                 <?php
-                if(!isset($_GET["image_path"])){
+                // if(!isset($_GET["image_path"])){
+                    if(!isset($_GET["new_image_name"])){
                     // $img_path = "images/18-days-voyage-m.jpg";
                     // $image_id = 40;
 
@@ -104,7 +108,12 @@ require 'con2database.php';
 
                     foreach ($new_data as $key => $value) {
                         $image_id = $value['id'];
-                        $img_path = $value['path'];
+                        // $img_path = $value['path'];
+                        $img_name = $value['image_name'];
+                        $src_img_path = 'gray_scale_images/'.$img_name;
+                        $gen_img_path = 'generated_images/'.$img_name;
+                        $tar_img_path = 'target_images/'.$img_name;
+                        $is_bayas = 0;
                         // $review_sum = $value['review_sum'];
                         // $count = $value['count'];
                         // $avg_review = $value['avg_review'];
@@ -113,34 +122,88 @@ require 'con2database.php';
    
                     // echo $img_path;
                     // echo $image_id;
+                    // echo $img_name;
+                    // echo $is_bayas;
+                    
 
 
                 }
                 else{
-                    $img_path = $_GET["image_path"];
+                    
+                    $is_bayas = $_GET["is_bayas"];
+                    $img_name = $_GET["new_image_name"];
                     $image_id = $_GET["new_image_id"];
+                    $src_img_path = 'gray_scale_images/'.$img_name;
+                    $gen_img_path = 'generated_images/'.$img_name;
+                    $tar_img_path = 'target_images/'.$img_name;
                     // echo $img_path;
-                    // echo $image_id;
-                    echo "How much it looks realistic?";
+                    // echo $img_name;
+                    // echo $is_bayas;
+                    
                 }
-                
-                ?>
-                    <img src = <?php echo $img_path; ?> style="width:256px;height:256px;" >
+                echo "How much it looks realistic?";
 
-                    <div class="rating-container">
+                ?>
+                <!-- <div style="width: 800px;"> -->
+                <div style = "width: 100%; max-width: 1000px;  margin: 0 auto; padding: 5px;">
+
+                    <!-- <img src = <?php echo $img_path; ?> style="width:256px;height:256px;" > -->
+                    <!-- <img src = <?php echo $img_path; ?> style="width:256px;height:256px;" > -->
+                    
+                    <div style = "display: inline-block; text-align: center;">
+                    <figure>
+                    <img src = <?php echo $src_img_path; ?> style="width: 100%; max-width: 200px; height: 100%; max-height: 200px;" >
+                    <figcaption>Gray Scale Image</figcaption>
+                    </figure>
+                    </div>
+                    
+                    <div style = "display: inline-block; text-align: center;">
+                    <figure>
+                    <img src = <?php echo $gen_img_path; ?> style="width: 100%; max-width: 200px; height: 100%; max-height: 200px;" >
+                    <figcaption>Generated Image</figcaption>
+                    </figure>
+                    </div>
+                    
+                    <?php
+                    if($is_bayas == 1){
+
+                        $old_image_rating = $_GET['old_image_rating'];
+                        echo '<div style = "display: inline-block; text-align: center;">';
+                        echo '<figure>';
+                        echo '<img src = "'.$tar_img_path.'"style="width: 100%; max-width: 200px; height: 100%; max-height: 200px;" >';
+                        echo '<figcaption>Target Image</figcaption>';
+                        echo '</figure>';
+                        echo '</div>';
+                    }
+                    else{
+                        $old_image_rating = 0;
+                    }
+
+                    ?>
+
+                </div>
+
+
+                    <div class="rating-container" style="margin: 0 auto; text-align: center;">
                                 <!-- <form action="" enctype="multipart/form-data" method="post"> -->
+                                
+                                <p style="padding-top: 10px; font-size: 20px;"> Rate it </p>
                                 <form action="submit_review.php" method="POST">
 
                                 <div class="col-md-3">
                                 <div class="form-group">
 
                                     <input type="hidden" name="image_id" value=<?php echo $image_id; ?>>
+                                    <input type="hidden" name="is_bayas" value=<?php echo $is_bayas; ?>>
+                                    <input type="hidden" name="old_image_rating" value=<?php echo $old_image_rating; ?>>
                                     <input type="hidden" name="rating" id="rating" value="0">
-                                    <span class="rating-star" data-rating="1">&#9733;</span>
-                                    <span class="rating-star" data-rating="2">&#9733;</span>
-                                    <span class="rating-star" data-rating="3">&#9733;</span>
-                                    <span class="rating-star" data-rating="4">&#9733;</span>
-                                    <span class="rating-star" data-rating="5">&#9733;</span>
+                                    <span class="rating-star" data-rating="-2">-2</span>
+                                    <span class="rating-star" data-rating="-1">-1</span>
+                                    <span class="rating-star" data-rating="0">0</span>
+                                    <span class="rating-star" data-rating="1">1</span>
+                                    <span class="rating-star" data-rating="2">2</span>
+                                    <!-- <span class="rating-star" data-rating="99">Skip</span> -->
+                                    <!-- <span class="rating-star" data-rating="5">&#9733;</span> -->
                                 </div>
                             </div>
 

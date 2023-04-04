@@ -52,7 +52,7 @@
 <body>
 
 <?php
-$uploads_dir = "generated_images/";
+// $uploads_dir = "generated_images/";
 
 $servername = "localhost";
 $username = "root";
@@ -64,6 +64,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 ?>
 <?php
+
 if (isset($_FILES['files'])) {
 foreach ($_FILES['files']['tmp_name'] as $key => $tmp_name) {
   $file_name = $_FILES['files']['name'][$key];
@@ -74,14 +75,34 @@ foreach ($_FILES['files']['tmp_name'] as $key => $tmp_name) {
 
 
   if ($file_error == UPLOAD_ERR_OK) {
-    $upload_path = $uploads_dir . basename($file_name);
-    move_uploaded_file($file_temp, $upload_path);
+    if($_POST['image_type'] == "gray_image"){
+      $uploads_dir = "gray_scale_images/";
+      // $upload_path = $uploads_dir . basename($file_name);
+      // $sql_enter_new_image = "INSERT INTO `image_info` (`image_name`,`path`) VALUES ('$file_name', '$upload_path');";
+
+    }
+    elseif($_POST['image_type'] == "gen_image"){
+      $uploads_dir = "generated_images/";
+      $upload_path = $uploads_dir . basename($file_name);
+      $sql_enter_new_image = "INSERT INTO `image_info` (`image_name`,`path`) VALUES ('$file_name', '$upload_path');";
+
+      mysqli_query($conn, $sql_enter_new_image);
+      move_uploaded_file($file_temp, $upload_path);
+
+
+    }
+    elseif($_POST['image_type'] == "tar_image"){
+      $uploads_dir = "target_images/";
+    }
+    
+    // $upload_path = $uploads_dir . basename($file_name);
+    // move_uploaded_file($file_temp, $upload_path);
     // Insert the file URL into the database
         
-        $sql_enter_new_image = "INSERT INTO `image_info` (`image_name`,`path`) VALUES ('$file_name', '$upload_path');";
+        // $sql_enter_new_image = "INSERT INTO `image_info` (`image_name`,`path`) VALUES ('$file_name', '$upload_path');";
 
         // $sql = "INSERT INTO files (url) VALUES ('$file_url')";
-        mysqli_query($conn, $sql_enter_new_image);
+        // mysqli_query($conn, $sql_enter_new_image);
         
     // echo "File uploaded successfully: " . $upload_path . "<br>";
   } else {
@@ -121,6 +142,11 @@ mysqli_close($conn);
                         <h3 class="feature-heading">Choose one or more images to upload.</h3>
                         <div>
                         <form action="admin_page.php" method="post" enctype="multipart/form-data">
+                        
+                        <input type="radio" name="image_type" value="gray_image"> Gray Scale Image<br>
+                        <input type="radio" name="image_type" value="gen_image"> Generated Image<br>
+                        <input type="radio" name="image_type" value="tar_image"> Target Image<br>
+
                           <input type="file" name="files[]" multiple>
                           <input type="submit" value="Upload">
                         </form>
