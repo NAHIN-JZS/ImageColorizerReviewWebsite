@@ -42,21 +42,21 @@
 				header('location:index.php');
 				// echo "1";
         }
-				else{
-					//echo "Incorrect Password";
-					$login_error = 1; 
-					setcookie('unique_id5', uniqid(), time() + 36);
-					header('location:index.php');
-					// echo "2";
-				}
+				// else{
+				// 	//echo "Incorrect Password";
+				// 	$login_error = 1; 
+				// 	// setcookie('unique_id5', uniqid(), time() + 36);
+				// 	// header('location:index.php');
+				// 	// echo "2";
+				// }
 	}
-	else if ($first_time != 1){
-		//echo "Incorrect Password";
-		$first_time = 0; 
-		setcookie('unique_id5', uniqid(), time() + 36);
-		// echo "3";
-		header('location:index.php');
-	}
+	// else if ($first_time == 0){
+	// 	//echo "Incorrect Password";
+	// 	// $first_time = 0; 
+	// 	// setcookie('unique_id5', uniqid(), time() + 36);
+	// 	// echo "3";
+	// 	// header('location:index.php');
+	// }
         
 ?>
 
@@ -101,7 +101,7 @@
 						<input type="checkbox">Remember Me
 					</div> -->
 					<div class="form-group">
-						<input type="submit" value="Login" name="login" class="btn float-right login_btn">
+						<input type="submit" value="Submit" name="login" class="btn float-right login_btn">
 					</div>
 				</form>
 			</div>
@@ -121,7 +121,7 @@
 
 				<div class="d-flex justify-content-center links">
 				
-					Skip for Now? <a href="user_info.php"> Start Review</a>
+					Skip for Now? <a href="skip_user_info.php"> Start Review</a>
 				</div>
 			</div>
 		</div>
