@@ -21,7 +21,7 @@
 		// $email = $_POST['email'];
 		$password = $_POST['password'];
 
-		if ($password == "123#Nahin") {
+		if ($password == "1234") {
 				header('location:admin_page.php');
         }
 				else{
