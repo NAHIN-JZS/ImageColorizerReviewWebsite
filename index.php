@@ -27,6 +27,7 @@
 				$('form').submit();
 			});
 		});
+
 	</script>
 	<style>
 		.rating-star {
@@ -50,6 +51,17 @@
 
 <?php
 require 'con2database.php';
+
+if (!isset($_COOKIE['unique_id5'])) {
+  // This is a new user
+  header("Location: user_info.php");
+//   header('user_info.php');
+//   setcookie('unique_ide', uniqid(), time() + 360);
+} else {
+  // This is a returning user
+//   echo "here".$_COOKIE['unique_id5'];
+}
+
 ?>
     <!-- HEADER -->
     <header>
@@ -80,10 +92,16 @@ require 'con2database.php';
         </div>
     </header>
 
-    
 
     <!-- MAIN -->
     <main>
+
+
+
+
+
+
+
 
         <!-- GALLERY SECTION -->
                 <!-- <div class="section_text-box"> -->
@@ -95,6 +113,7 @@ require 'con2database.php';
 
                 <!-- <div style = "width: 700px; margin: 0 auto;"> -->
                 <div style = "width: 100%; max-width: 800px;  margin: 0 auto; padding: 55px 55px;">
+
 
                 <?php
                 // if(!isset($_GET["image_path"])){
