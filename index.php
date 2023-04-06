@@ -1,16 +1,4 @@
 
-<?php
-if (isset($_COOKIE['review_count'])){
-    // echo $_COOKIE['review_count'];
-    $user_review_count = $_COOKIE['review_count'];
-    if( $user_review_count % 2 == 0 ){
-        // echo $user_review_count;
-        echo "<script>alert('You have reviewed ".$_COOKIE['review_count']." images. Thankyou!!! 
-        We have a lot more images to reviewed. You can help us more further.');</script>";
-
-    }
-}
-?>
 
 
 <!DOCTYPE html>
@@ -23,6 +11,28 @@ if (isset($_COOKIE['review_count'])){
     <link rel="stylesheet" href="styles/css/main.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <?php
+
+// echo "<script>alert('You have reviewed ".$_COOKIE['review_count']." images. Thankyou!!! 
+// We have a lot more images to reviewed. You can help us more further.');</script>";
+// echo "<script>alert('Your message goes here.');</script>";
+
+    $i_b = isset($_GET["is_bayas"]) ? $_GET["is_bayas"] : 1;
+    // $i_b = $_GET["is_bayas"];
+ if (isset($_COOKIE['review_count']) && $i_b != 1){
+    // echo $_COOKIE['review_count'];
+    // echo "<script>alert('Your message goes here2.');</script>";
+     $user_review_count = $_COOKIE['review_count'];
+      if( $user_review_count % 10 == 0 ){
+        // echo $user_review_count;
+        // $random_number = 2;
+        // echo "<script>alert('The value of the cookie is even: $random_number');</script>";
+        echo "<script>alert('You have reviewed $user_review_count images. Thankyou!!! We have a lot more images to review. You can help us more.');</script>";
+
+     }
+}
+?>
+
 	<script>
 		$(document).ready(function() {
 			$('.rating-star').on('mouseenter', function() {
@@ -45,6 +55,7 @@ if (isset($_COOKIE['review_count'])){
 
         
 
+        
 	</script>
 	<style>
 		.rating-star {
@@ -194,10 +205,10 @@ if (!isset($_COOKIE['unique_id5'])) {
                 }
 
                 if($is_bayas == 1){
-                    echo "How Close the Generated Image to the Original Color Image";
+                    echo "<p id = 'image_portion'> How Close the Generated Image to the Original Color Image </p>";
                 }
                 else{
-                    echo "How realistic does the Generated Image look like?";
+                    echo "<p id = 'image_portion'> How realistic does the Generated Image look like? </p>";
 
                 }
                 ?>

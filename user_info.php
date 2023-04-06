@@ -30,7 +30,7 @@
 			$dbname = "image_colorizer";
 			$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-			setcookie('unique_id5', uniqid(), time() + 36);
+			setcookie('unique_id5', uniqid(), time() + 720);
 				$uAge = $_POST['age'];
 				$comPro = $_POST['cp'];
 				$c_id = $_COOKIE['unique_id5'];

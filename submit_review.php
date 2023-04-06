@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
 
-    header("Location: " . $url);
+    header("Location: " . $url."#image_portion");
     // echo $_POST['image_path'];
     // echo $url;
 
