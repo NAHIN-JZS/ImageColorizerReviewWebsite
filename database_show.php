@@ -22,6 +22,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 </head>
 
 <body>
+    <div class="row">
     <div class="feature">
         <div class="feature-image">
             <a href="admin_page.php" class="btn btn-black">Back To Admin</a>
@@ -37,6 +38,25 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             </button>
 
         </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-image">
+            <a href="summarize_image_info.php" class="btn btn-black">View Review Summary</a>
+            <button class="menu_toggle" >
+                <svg height="6" width="20" xmlns="http://www.w3.org/2000/svg" class="open">
+                    <g fill-rule="evenodd">
+                        <path d="M0 0h20v1H0zM0 5h20v1H0z"></path>
+                    </g>
+                </svg>
+                <svg height="15" width="16" xmlns="http://www.w3.org/2000/svg" class="close">
+                    <path d="M14.718.075l.707.707L8.707 7.5l6.718 6.718-.707.707L8 8.207l-6.718 6.718-.707-.707L7.293 7.5.575.782l.707-.707L8 6.793 14.718.075z" fill-rule="evenodd"></path>
+                </svg>
+            </button>
+
+        </div>
+    </div>
+
     </div>
 
     <?php

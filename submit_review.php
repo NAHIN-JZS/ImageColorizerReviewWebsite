@@ -44,17 +44,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                     $sql_update_rating = "UPDATE `image_info` SET `review_sum` = '$update_review_sum', `count`='$update_count', `avg_review`='$update_avg_review', `bayes_review_sum` = '$update_bayes_review_sum', `bayes_avg_review`='$update_bayes_avg_review' WHERE `image_info`.`id` = '$image_id';";
                     mysqli_query($connect, $sql_update_rating);
+
+
+                    // Get the current value from the cookie (if it exists)
+                $cookie_value = isset($_COOKIE['review_count']) ? $_COOKIE['review_count'] : 0;
+
+                // Increment the value
+                $cookie_value++;
+
+                // Set the cookie with the new value
+                setcookie('review_count', $cookie_value, time() + (86400 * 30)); // Set the cookie to expire in 30 days
+                  
+                // echo $_COOKIE['review_count'];
+
                 }
                 else{
                     // echo $rating;
                 }
                 
             
-            
+                
+                  
+
             // $_POST['image_path'] = "images/running-free-m.jpg";
 
             $get_one_image_with_lowest_count = 'SELECT * FROM `image_info` WHERE `image_info`. `count` = (SELECT MIN(`image_info`. `count`) FROM `image_info`) LIMIT 1;';
             
+
+
+
             $new_data = mysqli_query($connect, $get_one_image_with_lowest_count);
 
             foreach ($new_data as $key => $value) {
@@ -87,6 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $is_bayas = 1;
             $url = "index.php?new_image_name=".urlencode($image_name)."&new_image_id=".urlencode($image_id)."&old_image_rating=".urlencode($rating)."&is_bayas=".urlencode($is_bayas);
+            
+            // header("Location: " . $url);
+
         }
 
 

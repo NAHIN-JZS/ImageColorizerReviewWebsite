@@ -43,7 +43,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
     <div class="feature">
         <div class="feature-image">
-            <a href="user_info_show.php" class="btn btn-black">View Full User Info</a>
+            <a href="database_show.php" class="btn btn-black">View Full Image Info</a>
             <button class="menu_toggle" >
                 <svg height="6" width="20" xmlns="http://www.w3.org/2000/svg" class="open">
                     <g fill-rule="evenodd">
@@ -62,10 +62,12 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
     <?php
     // $sql_image_search = "SELECT * FROM `user_info`;";
-    $sql_user_info_count = "SELECT `user_info`.`age`, `user_info`.`cp`, COUNT(*) as cout FROM `user_info` GROUP BY `user_info`.`age`, `user_info`.`cp`;";
+    // $sql_user_info_count = "SELECT `user_info`.`age`, `user_info`.`cp`, COUNT(*) as cout FROM `user_info` GROUP BY `user_info`.`age`, `user_info`.`cp`;";
+
+    $avg_of_avg_reviews = "SELECT `image_info`.`model_name`, AVG(`image_info`.`avg_review`) AS average, AVG(`image_info`.`bayes_avg_review`) AS bayes_average FROM `image_info` WHERE `image_info`.`count` != 0 GROUP BY `image_info`.`model_name`;";
 
     // $new_data = mysqli_query($conn, $sql_image_search);
-    if ($new_data = mysqli_query($conn, $sql_user_info_count)) {
+    if ($new_data = mysqli_query($conn, $avg_of_avg_reviews)) {
       
         echo "    <style>";
         echo "    table {";
@@ -84,9 +86,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo "  <tr>";
         // echo "    <th>ID</th>";
         // echo "    <th>Cookie ID</th>";
-        echo "    <th>Age Range</th>";
-        echo "    <th>Comouter Proficiency</th>";
-        echo "    <th>Count</th>";
+        echo "    <th>Model Name</th>";
+        echo "    <th>Average</th>";
+        echo "    <th>Bayes Average</th>";
 
         echo "  </tr>";
         echo "</thead>";
@@ -99,9 +101,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             // echo '<td>' . $value['uid'] . '</td>';
             // echo '<td>' . $value['cookie_id'] . '</td>';
             
-            echo '<td>' . $value['age'] . '</td>';
-            echo '<td>' . $value['cp'] . '</td>';
-            echo '<td>' . $value['cout'] . '</td>';
+            echo '<td>' . $value['model_name'] . '</td>';
+            echo '<td>' . $value['average'] . '</td>';
+            echo '<td>' . $value['bayes_average'] . '</td>';
             // echo '<td>' . $value['path'] . '</td>';
             echo '</tr>';
         }

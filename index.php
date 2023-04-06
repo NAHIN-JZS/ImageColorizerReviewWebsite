@@ -1,3 +1,18 @@
+
+<?php
+if (isset($_COOKIE['review_count'])){
+    // echo $_COOKIE['review_count'];
+    $user_review_count = $_COOKIE['review_count'];
+    if( $user_review_count % 2 == 0 ){
+        // echo $user_review_count;
+        echo "<script>alert('You have reviewed ".$_COOKIE['review_count']." images. Thankyou!!! 
+        We have a lot more images to reviewed. You can help us more further.');</script>";
+
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +43,8 @@
 			});
 		});
 
+        
+
 	</script>
 	<style>
 		.rating-star {
@@ -49,6 +66,8 @@
 
 <body>
 
+
+
 <?php
 require 'con2database.php';
 
@@ -61,6 +80,17 @@ if (!isset($_COOKIE['unique_id5'])) {
   // This is a returning user
 //   echo "here".$_COOKIE['unique_id5'];
 }
+
+// if (isset($_COOKIE['review_count'])){
+//     // echo $_COOKIE['review_count'];
+//     $user_review_count = $_COOKIE['review_count'];
+//     if( $user_review_count % 2 == 0 ){
+//         // echo $user_review_count;
+//         echo "<script>alert('You have reviewed ".$_COOKIE['review_count']." images. Thankyou!!! 
+//         We have a lot more images to reviewed. You can help us more further.');</script>";
+
+//     }
+// }
 
 ?>
     <!-- HEADER -->
@@ -107,7 +137,9 @@ if (!isset($_COOKIE['unique_id5'])) {
                 <!-- <div class="section_text-box"> -->
                 <div style = "width: 100%; max-width: 1000px;  margin: 0 auto; padding: 0 55px;">
                                     <h2>Image Colorizer</h2>
-                                    <p class="opaque-black">Thank you for taking the time to review the output of my model-generated color photo. The model has attempted to colorize a black and white photo, and I would appreciate your feedback on how realistic it looks. I have included some AI-generated color photos below for reference. Please rate the photo on a scale of 1-5 stars, with 5 stars being the most realistic. Thank you for your help!
+                                    <p class="opaque-black">Thank you for taking the time to review the output of my model-generated color photo.
+                                         The model has attempted to colorize a black and white photo, and I would appreciate your feedback on how realistic it looks. I have included some AI-generated color photos below for reference.
+                                         Please use the scale of (-2 to 2) to rate the photo, with 2 being the most realistic and (-2) being not realistic at all. Thank you for your help!
                                     </p>
                 </div>
 
@@ -160,8 +192,14 @@ if (!isset($_COOKIE['unique_id5'])) {
                     // echo $is_bayas;
                     
                 }
-                echo "How much it looks realistic?";
 
+                if($is_bayas == 1){
+                    echo "How Close the Generated Image to the Original Color Image";
+                }
+                else{
+                    echo "How realistic does the Generated Image look like?";
+
+                }
                 ?>
                 <!-- <div style="width: 800px;"> -->
                 <div style = "width: 100%; max-width: 1000px;  margin: 0 auto; padding: 5px;">
@@ -172,7 +210,7 @@ if (!isset($_COOKIE['unique_id5'])) {
                     <div style = "display: inline-block; text-align: center;">
                     <figure>
                     <img src = <?php echo $src_img_path; ?> style="width: 100%; max-width: 200px; height: 100%; max-height: 200px;" >
-                    <figcaption>Gray Scale Image</figcaption>
+                    <figcaption>Black and White Image</figcaption>
                     </figure>
                     </div>
                     
@@ -190,7 +228,7 @@ if (!isset($_COOKIE['unique_id5'])) {
                         echo '<div style = "display: inline-block; text-align: center;">';
                         echo '<figure>';
                         echo '<img src = "'.$tar_img_path.'"style="width: 100%; max-width: 200px; height: 100%; max-height: 200px;" >';
-                        echo '<figcaption>Target Image</figcaption>';
+                        echo '<figcaption>Original Color Image</figcaption>';
                         echo '</figure>';
                         echo '</div>';
                     }

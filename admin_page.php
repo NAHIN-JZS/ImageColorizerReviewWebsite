@@ -48,7 +48,8 @@
         } elseif ($_POST['image_type'] == "gen_image") {
           $uploads_dir = "generated_images/";
           $upload_path = $uploads_dir . basename($file_name);
-          $sql_enter_new_image = "INSERT INTO `image_info` (`image_name`,`path`) VALUES ('$file_name', '$upload_path');";
+          $model_name = $_POST['model'];
+          $sql_enter_new_image = "INSERT INTO `image_info` (`image_name`,`path`, `model_name`) VALUES ('$file_name', '$upload_path', '$model_name');";
 
           mysqli_query($conn, $sql_enter_new_image);
           move_uploaded_file($file_temp, $upload_path);
@@ -96,14 +97,29 @@
 
   if ($result = mysqli_query($conn, $avg_of_bayes_avg_reviews)) {
     $row = $result->fetch_assoc();
-    $avg_bayes_rev = "The average review is " . $row['bayes_average'] . " out of 5";
+    $avg_bayes_rev = "The bayes average review is " . $row['bayes_average'] . " out of 5";
     $result->free();
   }
 
   // mysqli_close($conn);
   ?>
 
+<div class="feature">
+        <div class="feature-image">
+            <a href="index.php" class="btn btn-black">Back To Review</a>
+            <button class="menu_toggle">
+                <svg height="6" width="20" xmlns="http://www.w3.org/2000/svg" class="open">
+                    <g fill-rule="evenodd">
+                        <path d="M0 0h20v1H0zM0 5h20v1H0z"></path>
+                    </g>
+                </svg>
+                <svg height="15" width="16" xmlns="http://www.w3.org/2000/svg" class="close">
+                    <path d="M14.718.075l.707.707L8.707 7.5l6.718 6.718-.707.707L8 8.207l-6.718 6.718-.707-.707L7.293 7.5.575.782l.707-.707L8 6.793 14.718.075z" fill-rule="evenodd"></path>
+                </svg>
+            </button>
 
+        </div>
+    </div>
 
 
   <section class="our-features">
@@ -116,9 +132,27 @@
           <div>
             <form action="admin_page.php" method="post" enctype="multipart/form-data">
 
+              <h5>Image Type</h5>
               <input type="radio" name="image_type" value="gray_image"> Gray Scale Image<br>
               <input type="radio" name="image_type" value="gen_image"> Generated Image<br>
               <input type="radio" name="image_type" value="tar_image"> Target Image<br>
+
+              <br>
+              <h5>Model Name</h5>
+
+              <input type="radio" name="model" value="uth_1"> UTH-1<br>
+              <input type="radio" name="model" value="utr_2"> UTR-2<br>
+              <input type="radio" name="model" value="rtr_3"> RTR-3<br>
+              <input type="radio" name="model" value="utl_4"> UTL-4<br>
+              <input type="radio" name="model" value="rtl_5"> RTL-5<br>
+              <input type="radio" name="model" value="rtwl_6"> RTwL-6<br>
+              <input type="radio" name="model" value="uty_7"> UTY-7<br>
+              <input type="radio" name="model" value="utyc_8"> UTYc-8<br>
+              <input type="radio" name="model" value="rtls"> RTLS<br>
+              <input type="radio" name="model" value="rtlns"> RTLNS<br>
+              <input type="radio" name="model" value="utls"> UTLS<br>
+              <input type="radio" name="model" value="utlns"> UTLNS<br>
+
 
               <input type="file" name="files[]" multiple>
               <input type="submit" value="Upload">
@@ -134,7 +168,7 @@
 
         <div class="feature">
           <div class="feature-image"><img src="images/no-limit.svg" alt="no limit"></div>
-          <h3 class="feature-heading">Average Review <?php echo $row['bayes_average']; ?></h3>
+          <h3 class="feature-heading">Bayes Average Review <?php echo $row['bayes_average']; ?></h3>
           <p class="feature-text"> <?php echo $avg_bayes_rev; ?> </p>
         </div>
 
@@ -186,7 +220,7 @@
 
         <div class="feature">
           <div class="feature-image">
-            <a href="database_show.php" class="btn btn-black">Show Database</a>
+            <a href="summarize_image_info.php" class="btn btn-black">Show Database</a>
             <button class="menu_toggle">
               <svg height="6" width="20" xmlns="http://www.w3.org/2000/svg" class="open">
                 <g fill-rule="evenodd">
@@ -205,7 +239,7 @@
 
         <div class="feature">
           <div class="feature-image">
-            <a href="user_info_show.php" class="btn btn-black">Show User Info</a>
+            <a href="summarize_user_info.php" class="btn btn-black">Show User Info</a>
             <button class="menu_toggle">
               <svg height="6" width="20" xmlns="http://www.w3.org/2000/svg" class="open">
                 <g fill-rule="evenodd">
