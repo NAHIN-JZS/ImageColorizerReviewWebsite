@@ -13,6 +13,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <?php
 
+    // start the session
+    session_start();
+
+    if(isset($_SESSION['login'])){
+        // echo $_SESSION['login'];
+        unset($_SESSION['login']);
+        session_destroy();
+
+        // echo $_SESSION['login'];
+    }
 // echo "<script>alert('You have reviewed ".$_COOKIE['review_count']." images. Thankyou!!! 
 // We have a lot more images to reviewed. You can help us more further.');</script>";
 // echo "<script>alert('Your message goes here.');</script>";

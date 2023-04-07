@@ -13,6 +13,8 @@
 
 <?php
 
+// start the session
+session_start();
 	require 'con2database.php';
 	$login_error = 0;
 	if(isset($_POST['login'])) {
@@ -22,6 +24,10 @@
 		$password = $_POST['password'];
 
 		if ($password == "1234") {
+
+				
+				$_SESSION['login'] = 1;
+
 				header('location:admin_page.php');
         }
 				else{
