@@ -47,6 +47,10 @@
       if ($file_error == UPLOAD_ERR_OK) {
         if ($_POST['image_type'] == "gray_image") {
           $uploads_dir = "gray_scale_images/";
+          $upload_path = $uploads_dir . basename($file_name);
+          
+          move_uploaded_file($file_temp, $upload_path);
+
           // $upload_path = $uploads_dir . basename($file_name);
           // $sql_enter_new_image = "INSERT INTO `image_info` (`image_name`,`path`) VALUES ('$file_name', '$upload_path');";
 
@@ -60,6 +64,9 @@
           move_uploaded_file($file_temp, $upload_path);
         } elseif ($_POST['image_type'] == "tar_image") {
           $uploads_dir = "target_images/";
+          $upload_path = $uploads_dir . basename($file_name);
+          
+          move_uploaded_file($file_temp, $upload_path);
         }
 
         // $upload_path = $uploads_dir . basename($file_name);
