@@ -158,8 +158,8 @@ if (!isset($_COOKIE['unique_id5'])) {
                 <!-- <div class="section_text-box"> -->
                 <div style = "width: 100%; max-width: 1000px;  margin: 0 auto; padding: 0 55px;">
                                     <h2>Image Colorizer</h2>
-                                    <p class="opaque-black">Thank you for taking the time to review the output of my model-generated color photo.
-                                         The model has attempted to colorize a black and white photo, and I would appreciate your feedback on how realistic it looks. I have included some AI-generated color photos below for reference.
+                                    <p class="opaque-black">Thank you for taking the time to review the output of our model-generated color photo.
+                                         The model has attempted to colorize a black and white photo, and we would appreciate your feedback on how realistic it looks. We have included some AI-generated color photos below for reference.
                                          Please use the scale of (-2 to 2) to rate the photo, with 2 being the most realistic and (-2) being not realistic at all. Thank you for your help!
                                     </p>
                 </div>
@@ -331,10 +331,10 @@ if (!isset($_COOKIE['unique_id5'])) {
                         </li> -->
                     </ul>
                 </div>
-                <div class="footer_copyright">
+                <!-- <div class="footer_copyright">
                     <a href="convert_an_image.php" class="invite-link invite-link-white">Convert Image</a>
                     <p class="opaque-grey">Copyright 2022. All Rights Reserved</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </footer>

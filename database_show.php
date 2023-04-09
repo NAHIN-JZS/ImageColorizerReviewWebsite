@@ -117,7 +117,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         foreach ($new_data as $key => $value) {
             echo '<tr>';
             echo '<td>' . $value['id'] . '</td>';
-            echo '<td>' . $value['image_name'] . '</td>';
+            echo '<td><a href="selected_image_show.php?selected_image_name='.$value['image_name'] .'">' . $value['image_name'] . '</a></td>';
             echo '<td>' . $value['path'] . '</td>';
             echo '<td>' . $value['count'] . '</td>';
             echo '<td>' . $value['review_sum'] . '</td>';

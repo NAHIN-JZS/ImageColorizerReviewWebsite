@@ -66,11 +66,16 @@
 
 <div class="container">
 
+<div style = "width: 100%; max-width: 1000px;  margin: 0 auto; padding: 0 55px;">
+                                    <h2>Reviewer Survey</h2>
+                                    <p class="opaque-black"> Before we started, we needed to know a little bit more about you. You can also <a href="skip_user_info.php">skip and start reviewing.</a> </p>
+                </div>
+
 	<div class="d-flex justify-content-center h-100">
     
 		<div class="card">
 			<div class="card-header">
-				<h3>Reviewer Survey</h3>
+				<h3>Survey</h3>
 				
 			</div>
 			<div class="card-body">
