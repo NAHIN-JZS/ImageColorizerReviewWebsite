@@ -62,7 +62,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
     <?php
     // $sql_image_search = "SELECT * FROM `user_info`;";
-    $sql_user_info_count = "SELECT `user_info`.`age`, `user_info`.`cp`, COUNT(*) as cout FROM `user_info` GROUP BY `user_info`.`age`, `user_info`.`cp`;";
+    $sql_user_info_count = "SELECT `user_info`.`age`, `user_info`.`cp`, COUNT(*) as cout,  SUM(`user_info`.`review_sum`) as r_sum, SUM(`user_info`.`bayes_review_sum`) as b_r_sum, SUM(`user_info`.`count`) as count_sum FROM `user_info` GROUP BY `user_info`.`age`, `user_info`.`cp`;";
 
     // $new_data = mysqli_query($conn, $sql_image_search);
     if ($new_data = mysqli_query($conn, $sql_user_info_count)) {
@@ -87,6 +87,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo "    <th>Age Range</th>";
         echo "    <th>Computer Proficiency</th>";
         echo "    <th>Count</th>";
+        echo "    <th>Average Review</th>";
+        echo "    <th>Average Conditional Review</th>";
 
         echo "  </tr>";
         echo "</thead>";
@@ -102,7 +104,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             echo '<td>' . $value['age'] . '</td>';
             echo '<td>' . $value['cp'] . '</td>';
             echo '<td>' . $value['cout'] . '</td>';
-            // echo '<td>' . $value['path'] . '</td>';
+            echo '<td>' . $value['r_sum']/$value['count_sum'] . '</td>';
+            echo '<td>' . $value['b_r_sum']/$value['count_sum'] . '</td>';
+            
             echo '</tr>';
         }
 

@@ -6,6 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rating = $_POST['rating'];
     $is_bayas = $_POST['is_bayas'];
     $old_image_rating = $_POST['old_image_rating'];
+
+    
     // echo $is_bayas;
 
         if($is_bayas == 1){
@@ -25,6 +27,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $bayes_review_sum = $value['bayes_review_sum'];
                 $bayes_avg_review = $value['bayes_avg_review'];
             }
+
+
+            if(isset($_COOKIE['unique_id5'])){
+
+                $cookie_id = $_COOKIE['unique_id5'];
+            
+                $sql_retive_current_user = "SELECT * FROM `user_info` WHERE `user_info`.`cookie_id` = '$cookie_id' ;";
+                $user_data = mysqli_query($connect, $sql_retive_current_user);
+
+                foreach ($user_data as $user_key => $user_value) {
+                    // $id = $value['id'];
+                    $user_review_sum = $user_value['review_sum'];
+                    $user_count = $user_value['count'];
+                    // $avg_review = $value['avg_review'];
+                    $user_bayes_review_sum = $user_value['bayes_review_sum'];
+                    // $bayes_avg_review = $value['bayes_avg_review'];
+                }
+            }
+
+
                 if($rating != "99"){
                     // echo $rating;
                     //check if it is skipped or not
@@ -45,6 +67,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $sql_update_rating = "UPDATE `image_info` SET `review_sum` = '$update_review_sum', `count`='$update_count', `avg_review`='$update_avg_review', `bayes_review_sum` = '$update_bayes_review_sum', `bayes_avg_review`='$update_bayes_avg_review' WHERE `image_info`.`id` = '$image_id';";
                     mysqli_query($connect, $sql_update_rating);
 
+
+
+                    //User part
+                    if(isset($_COOKIE['unique_id5'])){
+
+                        $update_user_review_sum = $user_review_sum + $old_image_rating;
+                        $update_user_bayes_review_sum = $user_bayes_review_sum + $rating;
+                        $update_user_count = $user_count + 1;
+
+                        $sql_user_update_rating = "UPDATE `user_info` SET `review_sum` = '$update_user_review_sum', `count`='$update_user_count', `bayes_review_sum` = '$update_user_bayes_review_sum' WHERE `user_info`.`cookie_id` = '$cookie_id';";
+                        mysqli_query($connect, $sql_user_update_rating);
+                        echo $cookie_id .'\n';
+                        echo $update_user_review_sum.'\n';
+                        echo $update_user_bayes_review_sum.'\n';
+                        echo $update_user_count.'\n';
+                    }
 
                     // Get the current value from the cookie (if it exists)
                 $cookie_value = isset($_COOKIE['review_count']) ? $_COOKIE['review_count'] : 0;

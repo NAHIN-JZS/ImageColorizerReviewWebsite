@@ -24,22 +24,26 @@
 		if (isset($_POST['age'])) {
             
 
-			$servername = "localhost";
-			$username = "root";
-			$password = "";
-			$dbname = "image_colorizer";
-			$conn = mysqli_connect($servername, $username, $password, $dbname);
+			// $servername = "localhost";
+			// $username = "root";
+			// $password = "";
+			// $dbname = "image_colorizer";
+			// $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-			setcookie('unique_id5', uniqid(), time() + 720);
+			setcookie('unique_id5', uniqid(), time() + 72);
 				$uAge = $_POST['age'];
 				$comPro = $_POST['cp'];
 				$c_id = $_COOKIE['unique_id5'];
-				$sql_enter_new_user_info = "INSERT INTO `user_info` (`cookie_id`,`age`,`cp`) VALUES ('$c_id', '$uAge', '$comPro');";
+			setcookie('age', $uAge, time() + 72);
+			setcookie('cp', $comPro, time() + 72);
 
-				mysqli_query($conn, $sql_enter_new_user_info);
+				// echo $c_id;
+				$url = "skip_user_info.php?age=".urlencode($uAge);
+				header('location:'. $url);
+				
 
                 // setcookie('unique_idee3', uniqid(), time() + 36);
-				header('location:index.php');
+				// header('location:index.php');
 				// echo "1";
         }
 				// else{

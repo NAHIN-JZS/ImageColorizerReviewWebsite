@@ -102,16 +102,18 @@
 <?php
 require 'con2database.php';
 
-if (!isset($_COOKIE['unique_id5'])) {
-  // This is a new user
-  header("Location: user_info.php");
-//   header('user_info.php');
-//   setcookie('unique_ide', uniqid(), time() + 360);
-} else {
-  // This is a returning user
-//   echo "here".$_COOKIE['unique_id5'];
-}
+if (!isset($_COOKIE['not_interested'])){
 
+    if (!isset($_COOKIE['unique_id5'])) {
+    // This is a new user
+    header("Location: user_info.php");
+    //   header('user_info.php');
+    //   setcookie('unique_ide', uniqid(), time() + 360);
+    } else {
+    // This is a returning user
+    //   echo "here".$_COOKIE['unique_id5'];
+    }
+}
 // if (isset($_COOKIE['review_count'])){
 //     // echo $_COOKIE['review_count'];
 //     $user_review_count = $_COOKIE['review_count'];
@@ -306,11 +308,11 @@ if (!isset($_COOKIE['unique_id5'])) {
                                     <input type="hidden" name="is_bayas" value=<?php echo $is_bayas; ?>>
                                     <input type="hidden" name="old_image_rating" value=<?php echo $old_image_rating; ?>>
                                     <input type="hidden" name="rating" id="rating" value="0">
-                                    <span class="rating-star" data-rating="-2">-2</span>
-                                    <span class="rating-star" data-rating="-1">-1</span>
-                                    <span class="rating-star" data-rating="0">0</span>
-                                    <span class="rating-star" data-rating="1">1</span>
-                                    <span class="rating-star" data-rating="2">2</span>
+                                    <span class="rating-star" data-rating="1">-2</span>
+                                    <span class="rating-star" data-rating="2">-1</span>
+                                    <span class="rating-star" data-rating="3">0</span>
+                                    <span class="rating-star" data-rating="4">1</span>
+                                    <span class="rating-star" data-rating="5">2</span>
                                     <!-- <span class="rating-star" data-rating="99">Skip</span> -->
                                     <!-- <span class="rating-star" data-rating="5">&#9733;</span> -->
                                 </div>
