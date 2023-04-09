@@ -64,8 +64,6 @@
 		});
 
         
-
-        
 	</script>
 	<style>
 		.rating-star {
@@ -80,6 +78,16 @@
 		.rating-star.active {
 			color: #ffbf00;
 		}
+
+        .btn.btn-red {
+            background-color: red;
+            color: white;
+        }
+
+        .btn.btn-red:hover {
+            background-color: #f5f5f5;
+            color: red;
+        }
 	</style>
     
 </head>
@@ -116,6 +124,7 @@ if (!isset($_COOKIE['unique_id5'])) {
 ?>
     <!-- HEADER -->
     <header>
+        
         <div class="container">
             <nav class="navbar">
                 <a href="index.php" class="logo">
@@ -123,7 +132,7 @@ if (!isset($_COOKIE['unique_id5'])) {
                     <img src="images/nahin_black.svg" alt="logo" height="150" width="150">
                 </a>
 
-
+                <div class="row">
                 <!-- <a href="add_image.php" class="btn btn-black">Convert an Image</a> -->
                 <a href="login.php" class="btn btn-black">Admin</a>
 
@@ -139,18 +148,31 @@ if (!isset($_COOKIE['unique_id5'])) {
                             fill-rule="evenodd"></path>
                     </svg>
                 </button>
+
+                <a href="close.php" class="btn btn-red">Exit</a>
+
+                <button class="menu_toggle">
+                    <svg height="6" width="20" xmlns="http://www.w3.org/2000/svg" class="open">
+                        <g fill-rule="evenodd">
+                            <path d="M0 0h20v1H0zM0 5h20v1H0z"></path>
+                        </g>
+                    </svg>
+                    <svg height="15" width="16" xmlns="http://www.w3.org/2000/svg" class="close">
+                        <path
+                            d="M14.718.075l.707.707L8.707 7.5l6.718 6.718-.707.707L8 8.207l-6.718 6.718-.707-.707L7.293 7.5.575.782l.707-.707L8 6.793 14.718.075z"
+                            fill-rule="evenodd"></path>
+                    </svg>
+                </button>
+                </div>
             </nav>
+        </div>
+        
         </div>
     </header>
 
 
     <!-- MAIN -->
     <main>
-
-
-
-
-
 
 
 
@@ -215,10 +237,10 @@ if (!isset($_COOKIE['unique_id5'])) {
                 }
 
                 if($is_bayas == 1){
-                    echo "<p id = 'image_portion'> How Close the Generated Image to the Original Color Image </p>";
+                    echo "<p id = 'image_portion'>The original color image is now revealed. How close is the generated image to the original color image? </p>";
                 }
                 else{
-                    echo "<p id = 'image_portion'> How realistic does the Generated Image look like? </p>";
+                    echo "<p id = 'image_portion'>You have reviewed ".$_COOKIE['review_count']." images out of 100. A new generated image has appeared. How realistic does it look? </p>";
 
                 }
                 ?>
@@ -264,8 +286,15 @@ if (!isset($_COOKIE['unique_id5'])) {
 
                     <div class="rating-container" style="margin: 0 auto; text-align: center;">
                                 <!-- <form action="" enctype="multipart/form-data" method="post"> -->
-                                
-                                <p style="padding-top: 10px; font-size: 20px;"> Rate it </p>
+                                <?php
+                                    if($is_bayas == 1){
+                                        echo '<p style="padding-top: 10px; font-size: 20px;"> Again Rate It </p>';
+                                    }
+                                    else{
+                                        echo '<p style="padding-top: 10px; font-size: 20px;"> Rate It </p>';
+                                    }
+                                    ?>
+                                        <!-- <p style="padding-top: 10px; font-size: 20px;"> Rate it </p> -->
                                 <form action="submit_review.php" method="POST">
 
                                 <div class="col-md-3">
