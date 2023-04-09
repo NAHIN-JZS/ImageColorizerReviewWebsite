@@ -29,18 +29,20 @@
 
     $i_b = isset($_GET["is_bayas"]) ? $_GET["is_bayas"] : 1;
     // $i_b = $_GET["is_bayas"];
- if (isset($_COOKIE['review_count']) && $i_b != 1){
-    // echo $_COOKIE['review_count'];
-    // echo "<script>alert('Your message goes here2.');</script>";
-     $user_review_count = $_COOKIE['review_count'];
-      if( $user_review_count % 10 == 0 ){
-        // echo $user_review_count;
-        // $random_number = 2;
-        // echo "<script>alert('The value of the cookie is even: $random_number');</script>";
-        echo "<script>alert('You have reviewed $user_review_count images. Thankyou!!! We have a lot more images to review. You can help us more.');</script>";
 
-     }
-}
+    // prompt for count message
+        // if (isset($_COOKIE['review_count']) && $i_b != 1){
+        //     // echo $_COOKIE['review_count'];
+        //     // echo "<script>alert('Your message goes here2.');</script>";
+        //     $user_review_count = $_COOKIE['review_count'];
+        //     if( $user_review_count % 10 == 0 ){
+        //         // echo $user_review_count;
+        //         // $random_number = 2;
+        //         // echo "<script>alert('The value of the cookie is even: $random_number');</script>";
+        //         echo "<script>alert('You have reviewed $user_review_count images. Thankyou!!! We have a lot more images to review. You can help us more.');</script>";
+
+        //     }
+        // }
 ?>
 
 	<script>

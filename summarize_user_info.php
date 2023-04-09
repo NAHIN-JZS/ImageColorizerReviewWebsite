@@ -85,7 +85,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         // echo "    <th>ID</th>";
         // echo "    <th>Cookie ID</th>";
         echo "    <th>Age Range</th>";
-        echo "    <th>Comouter Proficiency</th>";
+        echo "    <th>Computer Proficiency</th>";
         echo "    <th>Count</th>";
 
         echo "  </tr>";
