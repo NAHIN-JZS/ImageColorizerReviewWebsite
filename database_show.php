@@ -1,11 +1,14 @@
 <?php
 // $uploads_dir = "generated_images/";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "image_colorizer";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "image_colorizer";
+// $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+require 'con2database.php';
+
 
 // ini_set('max_file_uploads', 300);
 
@@ -68,7 +71,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     $sql_image_search = "SELECT * FROM `image_info`;";
 
     // $new_data = mysqli_query($conn, $sql_image_search);
-    if ($new_data = mysqli_query($conn, $sql_image_search)) {
+    if ($new_data = mysqli_query($connect, $sql_image_search)) {
         // foreach ($new_data as $key => $value) {
         //     $selected_image_id = $value['id'];
         //     $selected_image_path = $value['path'];
@@ -102,7 +105,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo "  <tr>";
         echo "    <th>ID</th>";
         echo "    <th>Image Name</th>";
-        echo "    <th>Path</th>";
+        echo "    <th>Model Name</th>";
         echo "    <th>Count</th>";
         echo "    <th>Review Sum</th>";
         echo "    <th>Average Review</th>";
@@ -118,7 +121,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             echo '<tr>';
             echo '<td>' . $value['id'] . '</td>';
             echo '<td><a href="selected_image_show.php?selected_image_name='.$value['image_name'] .'">' . $value['image_name'] . '</a></td>';
-            echo '<td>' . $value['path'] . '</td>';
+            echo '<td>' . $value['model_name'] . '</td>';
             echo '<td>' . $value['count'] . '</td>';
             echo '<td>' . $value['review_sum'] . '</td>';
             echo '<td>' . $value['avg_review'] . '</td>';
@@ -131,7 +134,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo "</tbody>";
         echo "</table>";
 
-        mysqli_close($conn);
+        mysqli_close($connect);
 
 
         // //   }

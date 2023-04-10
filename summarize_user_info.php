@@ -1,13 +1,15 @@
 <?php
 // $uploads_dir = "generated_images/";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "image_colorizer";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "image_colorizer";
+// $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // ini_set('max_file_uploads', 300);
+require 'con2database.php';
+
 
 ?>
 <!DOCTYPE html>
@@ -62,10 +64,10 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
     <?php
     // $sql_image_search = "SELECT * FROM `user_info`;";
-    $sql_user_info_count = "SELECT `user_info`.`age`, `user_info`.`cp`, COUNT(*) as cout,  SUM(`user_info`.`review_sum`) as r_sum, SUM(`user_info`.`bayes_review_sum`) as b_r_sum, SUM(`user_info`.`count`) as count_sum FROM `user_info` GROUP BY `user_info`.`age`, `user_info`.`cp`;";
+    $sql_user_info_count = "SELECT `user_info`.`age`, `user_info`.`cp`, COUNT(*) as cout,  AVG(`user_info`.`avg_review`) as r_avg, AVG(`user_info`.`avg_bayes_review`) as b_r_avg, SUM(`user_info`.`count`) as count_sum FROM `user_info` GROUP BY `user_info`.`age`, `user_info`.`cp`;";
 
     // $new_data = mysqli_query($conn, $sql_image_search);
-    if ($new_data = mysqli_query($conn, $sql_user_info_count)) {
+    if ($new_data = mysqli_query($connect, $sql_user_info_count)) {
       
         echo "    <style>";
         echo "    table {";
@@ -87,6 +89,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo "    <th>Age Range</th>";
         echo "    <th>Computer Proficiency</th>";
         echo "    <th>Count</th>";
+        echo "    <th>Total Number of Image Review</th>";
         echo "    <th>Average Review</th>";
         echo "    <th>Average Conditional Review</th>";
 
@@ -104,8 +107,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             echo '<td>' . $value['age'] . '</td>';
             echo '<td>' . $value['cp'] . '</td>';
             echo '<td>' . $value['cout'] . '</td>';
-            echo '<td>' . $value['r_sum']/$value['count_sum'] . '</td>';
-            echo '<td>' . $value['b_r_sum']/$value['count_sum'] . '</td>';
+            echo '<td>' . $value['count_sum'] . '</td>';
+            echo '<td>' . $value['r_avg'] . '</td>';
+            echo '<td>' . $value['b_r_avg'] . '</td>';
             
             echo '</tr>';
         }
@@ -113,7 +117,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo "</tbody>";
         echo "</table>";
 
-        mysqli_close($conn);
+        mysqli_close($connect);
 
 
         // //   }

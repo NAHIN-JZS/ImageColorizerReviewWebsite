@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Image Colorizer</title>
    
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
@@ -33,9 +33,11 @@
 			setcookie('unique_id5', uniqid(), time() + 72);
 				$uAge = $_POST['age'];
 				$comPro = $_POST['cp'];
+				$gender = $_POST['gender'];
 				$c_id = $_COOKIE['unique_id5'];
 			setcookie('age', $uAge, time() + 72);
 			setcookie('cp', $comPro, time() + 72);
+			setcookie('gender', $gender, time() + 72);
 
 				// echo $c_id;
 				$url = "skip_user_info.php?age=".urlencode($uAge);
@@ -103,7 +105,12 @@
 						<p>Your Computer Proficiency?<br></p>
 						<input type="radio" name="cp" value="low"> Low<br>
                         <input type="radio" name="cp" value="medium"> Medium<br>
-                        <input type="radio" name="cp" value="high"> High<br>
+                        <input type="radio" name="cp" value="high"> High<br><br>
+
+						<p>Gender?<br></p>
+						<input type="radio" name="gender" value="male"> Male<br>
+                        <input type="radio" name="gender" value="female"> Female<br>
+                        <!-- <input type="radio" name="cp" value="high"> High<br> -->
 
 					<!-- </div> -->
 					<!-- <div class="row align-items-center remember">

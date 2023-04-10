@@ -1,11 +1,14 @@
 <?php
 // $uploads_dir = "generated_images/";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "image_colorizer";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "image_colorizer";
+// $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+require 'con2database.php';
+
 
 // ini_set('max_file_uploads', 300);
 
@@ -64,7 +67,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     // $sql_user_info_count = "SELECT `user_info`.`age`, `user_info`.`cp`, COUNT(*) as cout FROM `user_info` GROUP BY `user_info`.`age`, `user_info`.`cp`;";
 
     // $new_data = mysqli_query($conn, $sql_image_search);
-    if ($new_data = mysqli_query($conn, $sql_user_search)) {
+    if ($new_data = mysqli_query($connect, $sql_user_search)) {
       
         echo "    <style>";
         echo "    table {";
@@ -110,7 +113,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo "</tbody>";
         echo "</table>";
 
-        mysqli_close($conn);
+        mysqli_close($connect);
 
 
         // //   }

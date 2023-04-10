@@ -20,11 +20,15 @@
     // echo $_SESSION['login'];
   }
 
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "image_colorizer";
-  $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+  require 'con2database.php';
+
+
+  // $servername = "localhost";
+  // $username = "root";
+  // $password = "";
+  // $dbname = "image_colorizer";
+  // $conn = mysqli_connect($servername, $username, $password, $dbname);
 
   // ini_set('max_file_uploads', 300);
 
@@ -60,7 +64,7 @@
           $model_name = $_POST['model'];
           $sql_enter_new_image = "INSERT INTO `image_info` (`image_name`,`path`, `model_name`) VALUES ('$file_name', '$upload_path', '$model_name');";
 
-          mysqli_query($conn, $sql_enter_new_image);
+          mysqli_query($connect, $sql_enter_new_image);
           move_uploaded_file($file_temp, $upload_path);
         } elseif ($_POST['image_type'] == "tar_image") {
           $uploads_dir = "target_images/";
@@ -98,7 +102,7 @@
   // Replace table_name and column_name with your values
   $avg_of_avg_reviews = "SELECT AVG(`image_info`.`avg_review`) AS average FROM `image_info` WHERE `image_info`.`count` != 0;";
 
-  if ($result = mysqli_query($conn, $avg_of_avg_reviews)) {
+  if ($result = mysqli_query($connect, $avg_of_avg_reviews)) {
     $row = $result->fetch_assoc();
     $avg_rev = "The average review is " . $row['average'] . " out of 5";
     $avg_review = $row['average'];
@@ -107,7 +111,7 @@
 
   $avg_of_bayes_avg_reviews = "SELECT AVG(`image_info`.`bayes_avg_review`) AS bayes_average FROM `image_info` WHERE `image_info`.`count` != 0;";
 
-  if ($result = mysqli_query($conn, $avg_of_bayes_avg_reviews)) {
+  if ($result = mysqli_query($connect, $avg_of_bayes_avg_reviews)) {
     $row = $result->fetch_assoc();
     $avg_bayes_rev = "The bayes average review is " . $row['bayes_average'] . " out of 5";
     $result->free();

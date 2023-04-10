@@ -1,11 +1,13 @@
 <?php
 // $uploads_dir = "generated_images/";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "image_colorizer";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "image_colorizer";
+// $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+require 'con2database.php';
 
 // ini_set('max_file_uploads', 300);
 
@@ -67,7 +69,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     $avg_of_avg_reviews = "SELECT `image_info`.`model_name`, AVG(`image_info`.`avg_review`) AS average, AVG(`image_info`.`bayes_avg_review`) AS bayes_average FROM `image_info` WHERE `image_info`.`count` != 0 GROUP BY `image_info`.`model_name`;";
 
     // $new_data = mysqli_query($conn, $sql_image_search);
-    if ($new_data = mysqli_query($conn, $avg_of_avg_reviews)) {
+    if ($new_data = mysqli_query($connect, $avg_of_avg_reviews)) {
       
         echo "    <style>";
         echo "    table {";
@@ -111,7 +113,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo "</tbody>";
         echo "</table>";
 
-        mysqli_close($conn);
+        mysqli_close($connect);
 
 
         // //   }
