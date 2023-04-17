@@ -63,6 +63,18 @@ require 'con2database.php';
     </div>
 
     <?php
+
+    function median($arr) {
+        sort($arr);
+        $count = count($arr);
+        $mid = floor(($count-1)/2);
+        if($count % 2) {
+            return $arr[$mid];
+        } else {
+            return ($arr[$mid] + $arr[$mid+1])/2;
+        }
+    }
+
     // check if particular image is selected or not
     // require 'con2database.php';
     // if(isset($_POST['database_show'])) {
@@ -88,6 +100,7 @@ require 'con2database.php';
         // echo "hereeeeeeeeeeeeeeeee";
 
 
+
         echo "    <style>";
         echo "    table {";
         echo "      border-collapse: collapse;";
@@ -109,8 +122,10 @@ require 'con2database.php';
         echo "    <th>Count</th>";
         echo "    <th>Review Sum</th>";
         echo "    <th>Average Review</th>";
-        echo "    <th> Bayes Review </th>";
-        echo "    <th> Average Bayes Review</th>";
+        echo "    <th> Conditional Review </th>";
+        echo "    <th> Average Conditional Review</th>";
+        echo "    <th> Median Review</th>";
+        echo "    <th> Median Conditional Review</th>";
         echo "  </tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -127,6 +142,15 @@ require 'con2database.php';
             echo '<td>' . $value['avg_review'] . '</td>';
             echo '<td>' . $value['bayes_review_sum'] . '</td>';
             echo '<td>' . $value['bayes_avg_review'] . '</td>';
+
+            $all_review_array = unserialize($value['reviews']);
+            $all_bayes_review_array = unserialize($value['bayes_review']);
+            $review_median = median($all_review_array);
+            $bayes_review_median = median($all_bayes_review_array);
+            
+            // echo '<td>' . $review_median . '</td>';
+            echo '<td>' . $review_median . '</td>';
+            echo '<td>' . $bayes_review_median . '</td>';
             // echo '<td>' . $value['path'] . '</td>';
             echo '</tr>';
         }

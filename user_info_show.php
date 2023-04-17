@@ -63,6 +63,19 @@ require 'con2database.php';
     </div>
 
     <?php
+
+    function median($arr) {
+        $count = count($arr);
+        sort($arr);
+        // $count = count($arr);
+        $mid = floor(($count-1)/2);
+        if($count % 2) {
+            return $arr[$mid];
+        } else {
+            return ($arr[$mid] + $arr[$mid+1])/2;
+        }
+    }
+
     $sql_user_search = "SELECT * FROM `user_info`;";
     // $sql_user_info_count = "SELECT `user_info`.`age`, `user_info`.`cp`, COUNT(*) as cout FROM `user_info` GROUP BY `user_info`.`age`, `user_info`.`cp`;";
 
@@ -91,6 +104,8 @@ require 'con2database.php';
         echo "    <th>Count</th>";
         echo "    <th>Review</th>";
         echo "    <th>Conditional Review</th>";
+        echo "    <th>Median of Review</th>";
+        echo "    <th>Median of Conditional Review</th>";
         echo "  </tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -106,6 +121,15 @@ require 'con2database.php';
             echo '<td>' . $value['count'] . '</td>';
             echo '<td>' . $value['review_sum'] . '</td>';
             echo '<td>' . $value['bayes_review_sum'] . '</td>';
+            $all_review_array = unserialize($value['reviews']);
+            $all_bayes_review_array = unserialize($value['bayes_review']);
+            $review_median = median($all_review_array);
+            $bayes_review_median = median($all_bayes_review_array);
+            
+            // echo '<td>' . $review_median . '</td>';
+            echo '<td>' . $review_median . '</td>';
+            echo '<td>' . $bayes_review_median . '</td>';
+
             // echo '<td>' . $value['path'] . '</td>';
             echo '</tr>';
         }

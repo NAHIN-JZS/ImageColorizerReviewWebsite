@@ -26,6 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $avg_review = $value['avg_review'];
                 $bayes_review_sum = $value['bayes_review_sum'];
                 $bayes_avg_review = $value['bayes_avg_review'];
+                $all_review = $value['reviews'];
+                $all_bayes_review = $value['bayes_review'];
+
             }
 
 
@@ -44,6 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $user_avg_review = $value['avg_review'];
                     $user_bayes_review_sum = $user_value['bayes_review_sum'];
                     $user_bayes_avg_review = $value['avg_bayes_review'];
+                    $user_all_review = $value['reviews'];
+                    $user_all_bayes_review = $value['bayes_review'];
                 }
             }
 
@@ -60,12 +65,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $update_bayes_review_sum = $bayes_review_sum + $rating;
                     $update_bayes_avg_review = $update_bayes_review_sum / $update_count;
 
+                    if (!empty($all_review_array)) {
+                        $all_review_array = unserialize($all_review);
+                        $all_bayes_review_array = unserialize($all_bayes_review);
+                        $user_all_review_array = unserialize($user_all_review);
+                        $user_all_bayes_review_array = unserialize($user_all_bayes_review);
+                    }
+                    else{
+                        $all_review_array = array();
+                        $all_bayes_review_array = array();
+                        $user_all_review_array = array();
+                        $user_all_bayes_review_array = array();
+                    }
+                    // $all_review_array = unserialize($all_review);
+                    // $all_bayes_review_array = unserialize($all_bayes_review);
+
+                    array_push($all_review_array, $old_image_rating);
+                    array_push($all_bayes_review_array, $rating);
+
+                    $updated_all_review_array = serialize($all_review_array);
+                    $updated_all_bayes_review_array = serialize($all_bayes_review_array);
+
+                    array_push($user_all_review_array, $old_image_rating);
+                    array_push($user_all_bayes_review_array, $rating);
+
+                    $updated_user_all_review_array = serialize($user_all_review_array);
+                    $updated_user_all_bayes_review_array = serialize($user_all_bayes_review_array);
+
                     
 
 
                     // echo 'Thank you for submitting your review. Your rating is: ' . $rating."  ". $update_avg_review . "    " . $update_count . " ". $update_review_sum;
                     
-                    $sql_update_rating = "UPDATE `image_info` SET `review_sum` = '$update_review_sum', `count`='$update_count', `avg_review`='$update_avg_review', `bayes_review_sum` = '$update_bayes_review_sum', `bayes_avg_review`='$update_bayes_avg_review' WHERE `image_info`.`id` = '$image_id';";
+                    $sql_update_rating = "UPDATE `image_info` SET `review_sum` = '$update_review_sum', `count`='$update_count', `avg_review`='$update_avg_review', `bayes_review_sum` = '$update_bayes_review_sum', `bayes_avg_review`='$update_bayes_avg_review', `reviews`= '$updated_all_review_array', `bayes_review` = '$updated_all_bayes_review_array' WHERE `image_info`.`id` = '$image_id';";
                     mysqli_query($connect, $sql_update_rating);
 
 
@@ -81,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $update_user_bayes_review_sum = $user_bayes_review_sum + $rating;
                         $update_user_bayes_avg_review = $update_user_bayes_review_sum / $update_user_count;
 
-                        $sql_user_update_rating = "UPDATE `user_info` SET `review_sum` = '$update_user_review_sum', `avg_review`='$update_user_avg_review', `count`='$update_user_count', `bayes_review_sum` = '$update_user_bayes_review_sum', `avg_bayes_review`='$update_user_bayes_avg_review' WHERE `user_info`.`cookie_id` = '$cookie_id';";
+                        $sql_user_update_rating = "UPDATE `user_info` SET `review_sum` = '$update_user_review_sum', `avg_review`='$update_user_avg_review', `count`='$update_user_count', `bayes_review_sum` = '$update_user_bayes_review_sum', `avg_bayes_review`='$update_user_bayes_avg_review', `reviews`= '$updated_user_all_review_array', `bayes_review` = '$updated_user_all_bayes_review_array' WHERE `user_info`.`cookie_id` = '$cookie_id';";
                         mysqli_query($connect, $sql_user_update_rating);
                         echo $cookie_id .'\n';
                         echo $update_user_review_sum.'\n';
@@ -144,10 +176,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             foreach ($data as $key => $value) {
                 // $id = $value['id'];
                 $image_name = $value['image_name'];
+                $new_all_review = $value['reviews'];
+                $new_all_bayes_review = $value['bayes_review'];
             }
 
             $is_bayas = 1;
-            $url = "index.php?new_image_name=".urlencode($image_name)."&new_image_id=".urlencode($image_id)."&old_image_rating=".urlencode($rating)."&is_bayas=".urlencode($is_bayas);
+            $url = "index.php?new_image_name=".urlencode($image_name)."&new_image_id=".urlencode($image_id)."&old_image_rating=".urlencode($rating)."&is_bayas=".urlencode($is_bayas)."&all_review=".urlencode($new_all_review)."&all_bayes_review=".urlencode($new_all_bayes_review);
             
             // header("Location: " . $url);
 

@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photosnap - Home</title>
+    <title>Image Colorizer</title>
     <link rel="stylesheet" href="styles/css/main.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -58,9 +58,9 @@
 				var rating = $(this).data('rating');
 				$('#rating').val(rating);
 				$('.rating-star').removeClass('active');
-				for (var i = 1; i <= rating; i++) {
-					$('.rating-star[data-rating="'+i+'"]').addClass('active');
-				}
+				// for (var i = 1; i <= rating; i++) {
+				// 	$('.rating-star[data-rating="'+i+'"]').addClass('active');
+				// }
 				$('form').submit();
 			});
 		});
@@ -71,14 +71,16 @@
 		.rating-star {
 			display: inline-block;
 			font-size: 24px;
-			color: #ccc;
+			/* color: #ccc; */
+			color: #1E90FF;
 			cursor: pointer;
 			margin-right: 25px;
 		}
 
 		.rating-star:hover,
 		.rating-star.active {
-			color: #ffbf00;
+			/* color: #ffbf00; */
+			color: #FF6347 ;
 		}
 
         .btn.btn-red {
@@ -93,6 +95,7 @@
 	</style>
     
 </head>
+
 
 
 <body>
@@ -215,6 +218,13 @@ if (!isset($_COOKIE['not_interested'])){
                         // $review_sum = $value['review_sum'];
                         // $count = $value['count'];
                         // $avg_review = $value['avg_review'];
+                        
+                        // $new_all_review = $value['reviews'];
+                        // $new_all_bayes_review = $value['bayes_review'];
+
+                        // Convert serialized string into array
+                        // $new_all_review_array = unserialize($value['reviews']);
+                        // $new_all_bayes_review_array = unserialize($value['bayes_review']);
                     }
                     
    
@@ -231,9 +241,15 @@ if (!isset($_COOKIE['not_interested'])){
                     $is_bayas = $_GET["is_bayas"];
                     $img_name = $_GET["new_image_name"];
                     $image_id = $_GET["new_image_id"];
+                    // $new_all_review = $_GET["all_review"];
+                    // $new_all_bayes_review = $_GET["all_bayes_review"];
+
                     $src_img_path = 'gray_scale_images/'.$img_name;
                     $gen_img_path = 'generated_images/'.$img_name;
                     $tar_img_path = 'target_images/'.$img_name;
+
+                    // $new_all_review_array = unserialize($new_all_review);
+                    // $new_all_bayes_review_array = unserialize($new_all_bayes_review);
                     // echo $img_path;
                     // echo $img_name;
                     // echo $is_bayas;
