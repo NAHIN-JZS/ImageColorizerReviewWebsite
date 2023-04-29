@@ -65,17 +65,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $update_bayes_review_sum = $bayes_review_sum + $rating;
                     $update_bayes_avg_review = $update_bayes_review_sum / $update_count;
 
-                    if (!empty($all_review_array)) {
-                        $all_review_array = unserialize($all_review);
-                        $all_bayes_review_array = unserialize($all_bayes_review);
-                        $user_all_review_array = unserialize($user_all_review);
-                        $user_all_bayes_review_array = unserialize($user_all_bayes_review);
-                    }
-                    else{
+                    if (empty($all_review)) {
                         $all_review_array = array();
                         $all_bayes_review_array = array();
-                        $user_all_review_array = array();
-                        $user_all_bayes_review_array = array();
+                        if(isset($_COOKIE['unique_id5'])){
+
+                            $user_all_review_array = array();
+                            $user_all_bayes_review_array = array();
+                        }
+                        
+                    }
+                    else{
+                        $all_review_array = unserialize($all_review);
+                        $all_bayes_review_array = unserialize($all_bayes_review);
+                        if(isset($_COOKIE['unique_id5'])){
+                            $user_all_review_array = unserialize($user_all_review);
+                            $user_all_bayes_review_array = unserialize($user_all_bayes_review);
+                        }
                     }
                     // $all_review_array = unserialize($all_review);
                     // $all_bayes_review_array = unserialize($all_bayes_review);
@@ -86,13 +92,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $updated_all_review_array = serialize($all_review_array);
                     $updated_all_bayes_review_array = serialize($all_bayes_review_array);
 
-                    array_push($user_all_review_array, $old_image_rating);
-                    array_push($user_all_bayes_review_array, $rating);
+                    if(isset($_COOKIE['unique_id5'])){
 
-                    $updated_user_all_review_array = serialize($user_all_review_array);
-                    $updated_user_all_bayes_review_array = serialize($user_all_bayes_review_array);
+                        array_push($user_all_review_array, $old_image_rating);
+                        array_push($user_all_bayes_review_array, $rating);
 
-                    
+                        $updated_user_all_review_array = serialize($user_all_review_array);
+                        $updated_user_all_bayes_review_array = serialize($user_all_bayes_review_array);
+
+                    }
 
 
                     // echo 'Thank you for submitting your review. Your rating is: ' . $rating."  ". $update_avg_review . "    " . $update_count . " ". $update_review_sum;

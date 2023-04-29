@@ -75,6 +75,40 @@ require 'con2database.php';
         }
     }
 
+    function calculateStatistics($numbers) {
+        $total = array_sum($numbers);
+        // echo $total;
+        $count = count($numbers);
+        $average = $total / $count;
+        $variance = 0;
+        foreach ($numbers as $num) {
+          $variance = $variance + pow($num - $average, 2);
+        }
+        $variance = $variance / $count;
+        $stdDeviation = sqrt($variance);
+      
+        return array($total, $count, $average, $variance, $stdDeviation);
+      }
+      
+    //   function Stand_Deviation($arr)
+    //   {
+    //       $num_of_elements = count($arr);
+  
+    //       $variance = 0.0;
+  
+    //               // calculating mean using array_sum() method
+    //       $average = array_sum($arr)/$num_of_elements;
+  
+    //       foreach($arr as $i)
+    //       {
+    //           // sum of squares of differences between 
+    //                       // all numbers and means.
+    //           $variance += pow(($i - $average), 2);
+    //       }
+  
+    //       return (float)sqrt($variance/$num_of_elements);
+    //   }
+
     // check if particular image is selected or not
     // require 'con2database.php';
     // if(isset($_POST['database_show'])) {
@@ -126,6 +160,10 @@ require 'con2database.php';
         echo "    <th> Average Conditional Review</th>";
         echo "    <th> Median Review</th>";
         echo "    <th> Median Conditional Review</th>";
+        echo "    <th> Veriance</th>";
+        echo "    <th> Conditional Veriance</th>";
+        echo "    <th> SD </th>";
+        echo "    <th> Conditional SD</th>";
         echo "  </tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -147,10 +185,25 @@ require 'con2database.php';
             $all_bayes_review_array = unserialize($value['bayes_review']);
             $review_median = median($all_review_array);
             $bayes_review_median = median($all_bayes_review_array);
+
+            $review_stats = calculateStatistics($all_review_array);
+            list($total, $count, $average, $variance, $stdDeviation) = $review_stats;
+
+            // $stdDeviation = calculateStatistics($all_review_array);
+            // list($total, $count, $average, $variance, $stdDeviation) = $review_stats;
+
+            $review_bayes_stats = calculateStatistics($all_bayes_review_array);
+            list($total_bayes, $count_bayes, $average_bayes, $variance_bayes, $stdDeviation_bayes) = $review_bayes_stats;
             
             // echo '<td>' . $review_median . '</td>';
             echo '<td>' . $review_median . '</td>';
             echo '<td>' . $bayes_review_median . '</td>';
+            
+            echo '<td>' . $total . '</td>';
+            echo '<td>' . $total_bayes . '</td>';
+            
+            echo '<td>' . $stdDeviation . '</td>';
+            echo '<td>' . $stdDeviation_bayes . '</td>';
             // echo '<td>' . $value['path'] . '</td>';
             echo '</tr>';
         }
