@@ -154,9 +154,9 @@ require 'con2database.php';
         echo "    <th>Image Name</th>";
         echo "    <th>Model Name</th>";
         echo "    <th>Count</th>";
-        echo "    <th>Review Sum</th>";
+        echo "    <th>Total Review</th>";
+        echo "    <th>Total Conditional Review </th>";
         echo "    <th>Average Review</th>";
-        echo "    <th> Conditional Review </th>";
         echo "    <th> Average Conditional Review</th>";
         echo "    <th> Median Review</th>";
         echo "    <th> Median Conditional Review</th>";
@@ -173,12 +173,12 @@ require 'con2database.php';
         foreach ($new_data as $key => $value) {
             echo '<tr>';
             echo '<td>' . $value['id'] . '</td>';
-            echo '<td><a href="selected_image_show.php?selected_image_name='.$value['image_name'] .'">' . $value['image_name'] . '</a></td>';
+            echo '<td><a href="selected_image_show.php?selected_image_id='.$value['id'] .'">' . $value['image_name'] . '</a></td>';
             echo '<td>' . $value['model_name'] . '</td>';
             echo '<td>' . $value['count'] . '</td>';
             echo '<td>' . $value['review_sum'] . '</td>';
-            echo '<td>' . $value['avg_review'] . '</td>';
             echo '<td>' . $value['bayes_review_sum'] . '</td>';
+            echo '<td>' . $value['avg_review'] . '</td>';
             echo '<td>' . $value['bayes_avg_review'] . '</td>';
 
             $all_review_array = unserialize($value['reviews']);
@@ -199,8 +199,8 @@ require 'con2database.php';
             echo '<td>' . $review_median . '</td>';
             echo '<td>' . $bayes_review_median . '</td>';
             
-            echo '<td>' . $total . '</td>';
-            echo '<td>' . $total_bayes . '</td>';
+            echo '<td>' . $variance . '</td>';
+            echo '<td>' . $variance_bayes . '</td>';
             
             echo '<td>' . $stdDeviation . '</td>';
             echo '<td>' . $stdDeviation_bayes . '</td>';

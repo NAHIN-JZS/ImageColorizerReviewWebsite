@@ -11,7 +11,7 @@ if(isset($_GET['age'])){
     echo $c_id;
 }
 else{
-    setcookie('not_interested', uniqid(), time() + 36);
+    setcookie('not_interested', uniqid(), time() + 86400);
 }
 // echo "3";
 header('location:index.php');

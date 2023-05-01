@@ -30,14 +30,14 @@
 			// $dbname = "image_colorizer";
 			// $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-			setcookie('unique_id5', uniqid(), time() + 72);
+			setcookie('unique_id5', uniqid(), time() + 172800);
 				$uAge = $_POST['age'];
 				$comPro = $_POST['cp'];
 				$gender = $_POST['gender'];
 				$c_id = $_COOKIE['unique_id5'];
-			setcookie('age', $uAge, time() + 72);
-			setcookie('cp', $comPro, time() + 72);
-			setcookie('gender', $gender, time() + 72);
+			setcookie('age', $uAge, time() + 172800);
+			setcookie('cp', $comPro, time() + 172800);
+			setcookie('gender', $gender, time() + 172800);
 
 				// echo $c_id;
 				$url = "skip_user_info.php?age=".urlencode($uAge);
