@@ -16,7 +16,7 @@
   // $uploads_dir = "generated_images/";
   session_start();
   if(!isset($_SESSION['login'])){
-    header("Location: index.php");
+    header("Location: login.php");
     // echo $_SESSION['login'];
   }
 
@@ -104,7 +104,7 @@
 
   if ($result = mysqli_query($connect, $avg_of_avg_reviews)) {
     $row = $result->fetch_assoc();
-    $avg_rev = "The average review is " . $row['average'] . " out of 5";
+    $avg_rev = "The average review is " . $row['average'] . " out of 7";
     $avg_review = $row['average'];
     $result->free();
   }
@@ -113,7 +113,7 @@
 
   if ($result = mysqli_query($connect, $avg_of_bayes_avg_reviews)) {
     $row = $result->fetch_assoc();
-    $avg_bayes_rev = "The bayes average review is " . $row['bayes_average'] . " out of 5";
+    $avg_bayes_rev = "The conditional average review is " . $row['bayes_average'] . " out of 7";
     $result->free();
   }
 
@@ -184,7 +184,7 @@
 
         <div class="feature">
           <div class="feature-image"><img src="images/no-limit.svg" alt="no limit"></div>
-          <h3 class="feature-heading">Bayes Average Review <?php echo $row['bayes_average']; ?></h3>
+          <h3 class="feature-heading">Conditional Average Review <?php echo $row['bayes_average']; ?></h3>
           <p class="feature-text"> <?php echo $avg_bayes_rev; ?> </p>
         </div>
 

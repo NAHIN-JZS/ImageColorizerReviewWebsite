@@ -141,7 +141,7 @@ if (!isset($_COOKIE['not_interested'])){
 
                 <div class="row">
                 <!-- <a href="add_image.php" class="btn btn-black">Convert an Image</a> -->
-                <a href="login.php" class="btn btn-black">Admin</a>
+                <!-- <a href="login.php" class="btn btn-black">Admin</a>
 
                 <button class="menu_toggle">
                     <svg height="6" width="20" xmlns="http://www.w3.org/2000/svg" class="open">
@@ -154,7 +154,7 @@ if (!isset($_COOKIE['not_interested'])){
                             d="M14.718.075l.707.707L8.707 7.5l6.718 6.718-.707.707L8 8.207l-6.718 6.718-.707-.707L7.293 7.5.575.782l.707-.707L8 6.793 14.718.075z"
                             fill-rule="evenodd"></path>
                     </svg>
-                </button>
+                </button> -->
 
                 <a href="close.php" class="btn btn-red">Exit</a>
 
@@ -189,7 +189,7 @@ if (!isset($_COOKIE['not_interested'])){
                                     <h2>Image Colorizer</h2>
                                     <p class="opaque-black">Thank you for taking the time to review the output of our model-generated color photo.
                                          The model has attempted to colorize a black and white photo, and we would appreciate your feedback on how realistic it looks. We have included some AI-generated color photos below for reference.
-                                         Please use the scale of (-2 to 2) to rate the photo, with 2 being the most realistic and (-2) being not realistic at all. Thank you for your help!
+                                         Please use the scale of (-3 to 3) to rate the photo, with 3 being the most realistic and (-3) being not realistic at all. Thank you for your help!
                                     </p>
                 </div>
 
@@ -324,11 +324,13 @@ if (!isset($_COOKIE['not_interested'])){
                                     <input type="hidden" name="is_bayas" value=<?php echo $is_bayas; ?>>
                                     <input type="hidden" name="old_image_rating" value=<?php echo $old_image_rating; ?>>
                                     <input type="hidden" name="rating" id="rating" value="0">
-                                    <span class="rating-star" data-rating="1">-2</span>
-                                    <span class="rating-star" data-rating="2">-1</span>
-                                    <span class="rating-star" data-rating="3">0</span>
-                                    <span class="rating-star" data-rating="4">1</span>
-                                    <span class="rating-star" data-rating="5">2</span>
+                                    <span class="rating-star" data-rating="1">-3</span>
+                                    <span class="rating-star" data-rating="2">-2</span>
+                                    <span class="rating-star" data-rating="3">-1</span>
+                                    <span class="rating-star" data-rating="4">0</span>
+                                    <span class="rating-star" data-rating="5">1</span>
+                                    <span class="rating-star" data-rating="6">2</span>
+                                    <span class="rating-star" data-rating="7">3</span>
                                     <!-- <span class="rating-star" data-rating="99">Skip</span> -->
                                     <!-- <span class="rating-star" data-rating="5">&#9733;</span> -->
                                 </div>
@@ -351,7 +353,7 @@ if (!isset($_COOKIE['not_interested'])){
         <div class="container">
             <div class="footer-row">
                 <div class="footer_logo-box">
-                    <a href="index.php" class="logo">
+                    <a href="login.php" class="logo">
                         <!-- <img src="images/logo-white.svg" alt="logo"> -->
                     <img src="images/nahin_white.png" alt="logo" height="70" width="130">
                     </a>

@@ -20,20 +20,31 @@ session_start();
 	if(isset($_POST['login'])) {
 
 		// Get data from FORM
-		// $email = $_POST['email'];
+		$u_name = $_POST['u_name'];
 		$password = $_POST['password'];
 
-		if ($password == "1234") {
+		if ($u_name =="admin"){
+
+			if ($password == "1234") {
 
 				
 				$_SESSION['login'] = 1;
 
 				header('location:admin_page.php');
-        }
+        	}
 				else{
 					//echo "Incorrect Password";
 					$login_error = 1; 
 				}
+
+		}
+
+		else{
+
+			$login_error = 2;
+		}
+
+		
 	}
         
 		// $sql_login_find = "SELECT * from `user` WHERE `email` = '$email';";
@@ -88,13 +99,13 @@ session_start();
 			</div>
 			<div class="card-body">
 				<form action="" method ="post">
-					<!-- <div class="input-group form-group">
+					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="email" name='email'>
+						<input type="text" class="form-control" placeholder="User Name" name='u_name'>
 						
-					</div> -->
+					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
@@ -115,9 +126,9 @@ session_start();
 							if($login_error == 1){
 								echo "Incorrect Password";
 							}
-							// elseif($login_error ==2) {
-							// 	echo "Not Registered Email";
-							// }
+							elseif($login_error ==2) {
+								echo "Incorrect User Name";
+							}
 						?>
 					</p>
 				<div class="d-flex justify-content-center links">
